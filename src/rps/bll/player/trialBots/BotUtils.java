@@ -4,10 +4,7 @@ import rps.bll.game.Move;
 import rps.bll.game.Result;
 import rps.bll.player.PlayerType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class BotUtils {
 
@@ -62,5 +59,26 @@ public class BotUtils {
                 returnMove = Move.Rock;
         }
         return returnMove;
+    }
+
+    public Move getLastMove(List<Move> list) {
+        return list.get(list.size()-1);
+    }
+
+    public Move getRandomMove() {
+        Random random = new Random();
+        Move returnMove;
+        int i = random.nextInt(3) +1;
+        switch (i) {
+            case 1:
+                returnMove = Move.Rock;
+                break;
+            case 2:
+                returnMove = Move.Scissor;
+                break;
+            default:
+                returnMove = Move.Paper;
+        }
+        return  returnMove;
     }
 }

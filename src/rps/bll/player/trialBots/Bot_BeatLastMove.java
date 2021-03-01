@@ -2,27 +2,30 @@ package rps.bll.player.trialBots;
 
 import rps.bll.game.Move;
 import rps.bll.game.Result;
+
 import java.util.ArrayList;
 
 /*
-this bot uses counting to predict the players next move
+this bot uses the opponents last move to predict the next
  */
+public class Bot_BeatLastMove implements IBot {
 
-public class Bot_FrequencyCounting implements IBot {
-
-    public ArrayList<Result> historicData;
+    private ArrayList<Result> historicData;
     private BotUtils botUtils = new BotUtils();
 
-    public Bot_FrequencyCounting(ArrayList<Result> historicData) {
+    public Bot_BeatLastMove(ArrayList<Result> historicData) {
         this.historicData = historicData;
     }
 
     public Move getMove() {
+        if(historicData.size()<1) {
+            return botUtils.getRandomMove();
+        }
         return calculateMove();
     }
 
     private Move calculateMove() {
-        Move opponentMove = botUtils.getMostFrequentMove(botUtils.getOpponentMoves(historicData));
+        Move opponentMove = botUtils.getLastMove(botUtils.getOpponentMoves(historicData));
         return botUtils.getWinningMove(opponentMove);
     }
 
@@ -32,7 +35,6 @@ public class Bot_FrequencyCounting implements IBot {
 
     @Override
     public String BotName() {
-        return "bot1";
+        return "bot2";
     }
-
 }
