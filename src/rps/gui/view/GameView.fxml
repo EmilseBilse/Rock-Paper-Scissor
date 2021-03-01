@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rps.gui.controller.GameViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rps.gui.controller.GameViewController">
    <children>
-      <Label layoutX="86.0" layoutY="190.0" text="Now you can start to build the GUI and implement an awesome game">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <HBox layoutY="236.0" prefHeight="100.0" prefWidth="420.0">
+         <children>
+            <ImageView fx:id="imgRock" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectRock" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgPaper" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectPaper" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgScissor" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectScissor" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+      <ListView fx:id="listView" layoutX="209.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>
