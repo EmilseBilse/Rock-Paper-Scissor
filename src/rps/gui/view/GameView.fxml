@@ -14,6 +14,6 @@
             <ImageView fx:id="imgScissor" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectScissor" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
-      <ListView fx:id="listView" layoutX="209.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ListView fx:id="listView" focusTraversable="false" layoutX="209.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>
