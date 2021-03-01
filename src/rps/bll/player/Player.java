@@ -4,6 +4,7 @@ package rps.bll.player;
 import rps.bll.game.IGameState;
 import rps.bll.game.Move;
 import rps.bll.game.Result;
+import rps.bll.player.trialBots.Bot_FrequencyCounting;
 
 //Java imports
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class Player implements IPlayer {
 
     private String name;
     private PlayerType type;
+
+    private Bot_FrequencyCounting bot_Freq;
 
     /**
      * @param name
@@ -48,8 +51,8 @@ public class Player implements IPlayer {
     public Move doMove(IGameState state) {
         //Historic data to analyze and decide next move...
         ArrayList<Result> results = (ArrayList<Result>) state.getHistoricResults();
-
+        bot_Freq = new Bot_FrequencyCounting(results);
         //Implement better AI here...
-        return Move.Rock;
+        return bot_Freq.getMove();
     }
 }
