@@ -4,10 +4,7 @@ package rps.bll.player;
 import rps.bll.game.IGameState;
 import rps.bll.game.Move;
 import rps.bll.game.Result;
-import rps.bll.player.trialBots.BotUtils;
-import rps.bll.player.trialBots.Bot_BeatLastMove;
-import rps.bll.player.trialBots.Bot_FrequencyCounting;
-import rps.bll.player.trialBots.IBot;
+import rps.bll.player.trialBots.*;
 
 //Java imports
 import java.util.ArrayList;
@@ -24,11 +21,8 @@ public class Player implements IPlayer {
 
     private String name;
     private PlayerType type;
-
-    private ArrayList<IBot> bots = new ArrayList<>();
-
-    private Bot_FrequencyCounting bot_Freq;
-    private Bot_BeatLastMove bot_beatLast;
+    private BotUtils botutils = new BotUtils();
+    private BotManager bMan;
 
     /**
      * @param name
@@ -60,59 +54,27 @@ public class Player implements IPlayer {
     public Move doMove(IGameState state) {
         //Historic data to analyze and decide next move...
         ArrayList<Result> results = (ArrayList<Result>) state.getHistoricResults();
-
-        bot_Freq = new Bot_FrequencyCounting(results);
-        bot_beatLast = new Bot_BeatLastMove(results);
-        bots.add(bot_Freq);
-        bots.add(bot_beatLast);
-
+        bMan = new BotManager(results);
 
         IBot currentBot = calculateBestBot(results);
-        System.out.println(currentBot.BotName());
+
+        System.out.println("currentBot: "+ currentBot.BotName());
 
         //Implement better AI here...
         return currentBot.getMove();
     }
 
-    //Ikke pisse smart lavet og jeg er ikke sikker på det virker
-    public IBot calculateBestBot(List<Result> results){
-        BotUtils botUtils = new BotUtils();
-        ArrayList<Move> opponentMoves = botUtils.getOpponentMoves(results);
 
-        //bot1 = Bot_Freq
-        int bot1 = 0;
-        //bot2 = Bot_BeatLast
-        int bot2 = 0;
-        for(int i =0; i< opponentMoves.size(); i++) {
-                ArrayList<Result> currentResults =new ArrayList<>();
-                for(int j = 0; j<i; j++) {
-                    currentResults.add(results.get(i));
-                }
-                for(IBot currentBot: bots) {
-                    currentBot.setResults(currentResults);
-                    Move botMove = currentBot.getMove();
-                    if(botMove == botUtils.getWinningMove(opponentMoves.get(i))) {
-                        switch (currentBot.toString()) {
-                            case "bot1":
-                                bot1++;
-                                break;
-                            case "bot2":
-                                bot2++;
-                                break;
-                        }
-                    }
-                }
+    public IBot calculateBestBot(List<Result> results){
+        IBot bestBot = bMan.getAllBots().get(0);
+        int highestCount = 0;
+        for(IBot currentBot: bMan.getAllBots()) {
+            int currentBotCount = botutils.getWinCount(results, currentBot);
+            if( currentBotCount > highestCount) {
+                bestBot = currentBot;
+                highestCount = currentBotCount;
+            }
         }
-        List<Integer> bots = Arrays.asList(bot1, bot2);
-        Collections.sort(bots);
-        int bestBot = bots.get(bots.size()-1);
-        IBot returnBot;
-        if(bestBot == bot1) {
-            returnBot = bot_Freq;
-        }
-        else {
-            returnBot = bot_beatLast;
-        }
-        return returnBot;
+        return bestBot;
     }
 }

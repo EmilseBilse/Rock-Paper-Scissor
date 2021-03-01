@@ -4,6 +4,7 @@ import rps.bll.game.Move;
 import rps.bll.game.Result;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 this bot uses the opponents last move to predict the next
@@ -18,15 +19,16 @@ public class Bot_BeatLastMove implements IBot {
     }
 
     public Move getMove() {
-        if(historicData.size()<1) {
-            return botUtils.getRandomMove();
-        }
-        return calculateMove();
+        return calculateMove(historicData);
     }
 
-    private Move calculateMove() {
-        Move opponentMove = botUtils.getLastMove(botUtils.getOpponentMoves(historicData));
-        return botUtils.getWinningMove(opponentMove);
+    public Move calculateMove(List<Result> results) {
+        Move returnMove = botUtils.getRandomMove();
+        if(results.size()>1) {
+            Move opponentMove = botUtils.getLastMove(botUtils.getHumanMoves(results));
+            returnMove = botUtils.getWinningMove(opponentMove);
+        }
+        return returnMove;
     }
 
     public void setResults(ArrayList<Result> historicData) {
@@ -34,7 +36,12 @@ public class Bot_BeatLastMove implements IBot {
     }
 
     @Override
+    public ArrayList<Result> getResults() {
+        return historicData;
+    }
+
+    @Override
     public String BotName() {
-        return "bot2";
+        return "Bot_beatLastMove";
     }
 }

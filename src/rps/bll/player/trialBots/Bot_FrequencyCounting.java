@@ -3,6 +3,7 @@ package rps.bll.player.trialBots;
 import rps.bll.game.Move;
 import rps.bll.game.Result;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 this bot uses counting to predict the players next move
@@ -18,11 +19,13 @@ public class Bot_FrequencyCounting implements IBot {
     }
 
     public Move getMove() {
-        return calculateMove();
+        return calculateMove(historicData);
     }
 
-    private Move calculateMove() {
-        Move opponentMove = botUtils.getMostFrequentMove(botUtils.getOpponentMoves(historicData));
+
+
+    public Move calculateMove(List<Result> results) {
+        Move opponentMove = botUtils.getMostFrequentMove(botUtils.getHumanMoves(results));
         return botUtils.getWinningMove(opponentMove);
     }
 
@@ -31,8 +34,14 @@ public class Bot_FrequencyCounting implements IBot {
     }
 
     @Override
-    public String BotName() {
-        return "bot1";
+    public ArrayList<Result> getResults() {
+        return historicData;
     }
+
+    @Override
+    public String BotName() {
+        return "Bot_FrequencyCounting";
+    }
+
 
 }
