@@ -29,15 +29,6 @@ public class Bot_FrequencyCounting implements IBot {
         return botUtils.getWinningMove(opponentMove);
     }
 
-    public void setResults(ArrayList<Result> historicData) {
-        this.historicData = historicData;
-    }
-
-    @Override
-    public ArrayList<Result> getResults() {
-        return historicData;
-    }
-
     @Override
     public String BotName() {
         return "Bot_FrequencyCounting";

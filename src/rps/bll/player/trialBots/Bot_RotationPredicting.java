@@ -39,16 +39,6 @@ public class Bot_RotationPredicting implements IBot {
     }
 
     @Override
-    public ArrayList<Result> getResults() {
-        return historicData;
-    }
-
-    @Override
-    public void setResults(ArrayList<Result> historicData) {
-        this.historicData = historicData;
-    }
-
-    @Override
     public String BotName() {
         return "Bot_RotationPredicting";
     }

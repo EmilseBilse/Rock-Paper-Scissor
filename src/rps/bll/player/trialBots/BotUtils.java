@@ -30,6 +30,28 @@ public class BotUtils {
         else return result.getLoserMove();
     }
 
+    public ArrayList<Move> getAIMoves(List<Result> historicData) {
+        ArrayList<Move> botMoves = new ArrayList<>();
+        for (int i = 0; i < historicData.size(); i++) {
+            if (historicData.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
+                botMoves.add(historicData.get(i).getWinnerMove());
+            } else if (historicData.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.Human)) {
+                botMoves.add(historicData.get(i).getLoserMove());
+            }
+        }
+        return botMoves;
+    }
+
+    public Move getAIMove(Result result) {
+        if (result.getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
+            return result.getWinnerMove();
+        } else if (result.getWinnerPlayer().getPlayerType().equals(PlayerType.Human)) {
+            return result.getLoserMove();
+        }
+        else return result.getLoserMove();
+    }
+
+
     public Move getMostFrequentMove(List<Move> moveList) {
         int r = 0;
         int p = 0;
@@ -69,6 +91,14 @@ public class BotUtils {
                 returnMove = Move.Rock;
         }
         return returnMove;
+    }
+
+    public ArrayList<Move> getWinningMoves(ArrayList<Move> movesToBeat) {
+        ArrayList<Move> returnMoves = new ArrayList<>();
+        for(Move move: movesToBeat) {
+            returnMoves.add(getWinningMove(move));
+        }
+        return returnMoves;
     }
 
     public Move getLastMove(List<Move> list) {
