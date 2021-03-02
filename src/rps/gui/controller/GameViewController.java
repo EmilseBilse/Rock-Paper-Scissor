@@ -2,6 +2,7 @@ package rps.gui.controller;
 
 // Java imports
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,35 +29,41 @@ public class GameViewController implements Initializable {
     public ImageView imgPaper;
     public ImageView imgRock;
     public ListView listView;
+    public Label lblBotScore;
+    public Label lblPlayerScore;
+    public ImageView imgBot;
+    public ImageView imgPlayer;
 
     private IPlayer human = new Player("player", PlayerType.Human);
     private IPlayer bot = new Player("bot", PlayerType.AI);
 
     private GameManager ge = new GameManager(human, bot);
 
+    private int botScore = 0;
+    private int playerScore = 0;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setIMG();
+
+        setImage("image/scissor.png", imgScissor);
+        setImage("image/paper.png", imgPaper);
+        setImage("image/rock.png", imgRock);
+        setImage("image/bot.png", imgBot);
+        setImage("image/human.png", imgPlayer);
 
 
     }
 
-    public void setIMG(){
-        File scissorFile = new File("image/scissor.png");
-        Image scissorImage = new Image(String.valueOf(scissorFile));
-        imgScissor.setImage(scissorImage);
 
-        File paperFile = new File("image/paper.png");
-        Image paperImage = new Image(String.valueOf(paperFile));
-        imgPaper.setImage(paperImage);
-
-        File rockFile = new File("image/rock.png");
-        Image rockImage = new Image(String.valueOf(rockFile));
-        imgRock.setImage(rockImage);
+    public void setImage(String path, ImageView imageView){
+        File file = new File(path);
+        Image image = new Image(String.valueOf(file));
+        imageView.setImage(image);
     }
+
 
     public void selectRock(MouseEvent mouseEvent) {
         playerMove("Rock");
@@ -84,10 +91,22 @@ public class GameViewController implements Initializable {
 
         listView.getItems().clear();
         ge.playRound(Move.valueOf(move));
-
+        setScores(ge.getGameState().getLastResult());
         ge.getGameState().getHistoricResults().forEach((result) -> {
             listView.getItems().add(getResultAsString(result));
         });
+    }
+
+    public void setScores(Result result){
+        if(result.getType() != ResultType.Tie) {
+            if (result.getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
+                botScore += 1;
+                lblBotScore.setText(String.valueOf(new Integer(botScore)));
+            } else {
+                playerScore += 1;
+                lblPlayerScore.setText(String.valueOf(new Integer(playerScore)));
+            }
+        }
     }
 
 }

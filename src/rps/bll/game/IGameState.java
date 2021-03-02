@@ -28,4 +28,6 @@ public interface IGameState {
      * @return
      */
     Collection<Result> getHistoricResults();
+
+    Result getLastResult();
 }

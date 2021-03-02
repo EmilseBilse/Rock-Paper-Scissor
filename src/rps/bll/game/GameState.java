@@ -37,4 +37,8 @@ public class GameState implements IGameState {
     public ArrayList<Result> getHistoricResults() {
         return historicResults;
     }
+
+    public Result getLastResult(){
+        return historicResults.get(historicResults.size() - 1);
+    }
 }

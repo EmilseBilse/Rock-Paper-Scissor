@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rps.gui.controller.GameViewController">
    <children>
@@ -14,6 +17,30 @@
             <ImageView fx:id="imgScissor" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectScissor" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
-      <ListView fx:id="listView" focusTraversable="false" layoutX="209.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imgPlayer" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                  <ListView fx:id="listView" focusTraversable="false" prefHeight="200.0" prefWidth="300.0" />
+                  <ImageView fx:id="imgBot" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="lblPlayerScore" text="0">
+                     <HBox.margin>
+                        <Insets left="50.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="lblBotScore" text="0">
+                     <HBox.margin>
+                        <Insets left="450.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
