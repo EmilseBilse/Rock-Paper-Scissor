@@ -55,7 +55,7 @@ public class Player implements IPlayer {
         //Historic data to analyze and decide next move...
         ArrayList<Result> results = (ArrayList<Result>) state.getHistoricResults();
 
-        //initilizes the bots an finds the most qualified to win
+        //initializes the bots an finds the most qualified to win
         bMan = new BotManager(results);
         IBot currentBot = calculateBestBot(results);
 
