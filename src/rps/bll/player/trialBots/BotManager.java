@@ -17,6 +17,8 @@ public class BotManager {
         allBots.add(botLast);
         Bot_FrequencyCounting botFreq = new Bot_FrequencyCounting(results);
         allBots.add(botFreq);
+        Bot_AntiRotationPredicting botAntiRot = new Bot_AntiRotationPredicting(results);
+        allBots.add(botAntiRot);
 
     }
 
@@ -24,7 +26,4 @@ public class BotManager {
         return allBots;
     }
 
-    public void addToBots(IBot bot) {
-        allBots.add(bot);
-    }
 }

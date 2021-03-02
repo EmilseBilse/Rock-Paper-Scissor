@@ -31,14 +31,6 @@ public class Bot_BeatLastMove implements IBot {
         return returnMove;
     }
 
-    public void setResults(ArrayList<Result> historicData) {
-        this.historicData = historicData;
-    }
-
-    @Override
-    public ArrayList<Result> getResults() {
-        return historicData;
-    }
 
     @Override
     public String BotName() {

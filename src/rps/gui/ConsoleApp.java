@@ -46,6 +46,7 @@ public class ConsoleApp {
             });
         }
 
+        //TODO
         if (ge.getGameState().getHistoricResults().size() > 0)
             System.out.println("Game stats: ....ehmmmm..not implemented yet...please FIXME");
     }

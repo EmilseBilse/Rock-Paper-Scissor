@@ -54,17 +54,20 @@ public class Player implements IPlayer {
     public Move doMove(IGameState state) {
         //Historic data to analyze and decide next move...
         ArrayList<Result> results = (ArrayList<Result>) state.getHistoricResults();
-        bMan = new BotManager(results);
 
+        //initializes the bots an finds the most qualified to win
+        bMan = new BotManager(results);
         IBot currentBot = calculateBestBot(results);
 
-        System.out.println("currentBot: "+ currentBot.BotName());
 
-        //Implement better AI here...
+        //currentBot = bMan.getAllBots().get(3);
+        System.out.println("currentBot: "+ currentBot.BotName());
         return currentBot.getMove();
     }
 
-
+    /*
+    Calculates the best performing bot, by checking which bot would have had the highest win count, had it played the entire game
+     */
     public IBot calculateBestBot(List<Result> results){
         IBot bestBot = bMan.getAllBots().get(0);
         int highestCount = 0;
