@@ -7,7 +7,7 @@ import rps.bll.game.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-// this bot assumes the player is predicting, its rotation and beats the moves, that would have defeated it.
+// this bot assumes the player is predicting its rotation, and beats the moves that would have defeated it.
 public class Bot_AntiRotationPredicting implements IBot {
 
     private ArrayList<Result> historicData;
