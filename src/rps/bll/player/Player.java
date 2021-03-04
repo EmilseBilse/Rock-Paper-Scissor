@@ -60,7 +60,7 @@ public class Player implements IPlayer {
         IBot currentBot = calculateBestBot(results);
 
 
-        //currentBot = bMan.getAllBots().get(3);
+        //currentBot = bMan.getAllBots().get(4);
         System.out.println("currentBot: "+ currentBot.BotName());
         return currentBot.getMove();
     }

@@ -19,6 +19,8 @@ public class BotManager {
         allBots.add(botFreq);
         Bot_AntiRotationPredicting botAntiRot = new Bot_AntiRotationPredicting(results);
         allBots.add(botAntiRot);
+        Bot_HistoryPattern botHisPat = new Bot_HistoryPattern(results);
+        allBots.add(botHisPat);
 
     }
 

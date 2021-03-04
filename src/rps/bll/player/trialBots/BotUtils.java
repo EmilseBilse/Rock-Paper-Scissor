@@ -145,4 +145,25 @@ public class BotUtils {
         }
         return winCount;
     }
+
+    public String movesToString (List<Move> moves) {
+        StringBuilder returnString = new StringBuilder();
+        for (Move currentMove : moves) {
+            switch (currentMove) {
+                case Rock -> returnString.append("r");
+                case Paper -> returnString.append("p");
+                case Scissor -> returnString.append("s");
+            }
+        }
+        return returnString.toString();
+    }
+
+    public Move charToMove (char c) {
+        return switch (String.valueOf(c)) {
+            case "r" -> Move.Rock;
+            case "s" -> Move.Scissor;
+            case "p" -> Move.Paper;
+            default -> null;
+        };
+    }
 }
