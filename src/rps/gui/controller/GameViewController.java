@@ -48,9 +48,9 @@ public class GameViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        setImage("image/scissor.png", imgScissor);
-        setImage("image/paper.png", imgPaper);
-        setImage("image/rock.png", imgRock);
+        setImage("image/scissors.png", imgScissor);
+        setImage("image/copy.png", imgPaper);
+        setImage("image/stones.png", imgRock);
         setImage("image/bot.png", imgBot);
         setImage("image/human.png", imgPlayer);
 

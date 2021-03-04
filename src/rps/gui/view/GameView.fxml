@@ -1,47 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rps.gui.controller.GameViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="/rps/gui/controller/GameViewStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rps.gui.controller.GameViewController">
    <children>
-      <HBox layoutY="236.0" prefHeight="100.0" prefWidth="420.0">
+      <HBox id="imageview" layoutY="236.0" prefHeight="100.0" prefWidth="420.0">
          <children>
-            <ImageView fx:id="imgRock" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectRock" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="imgPaper" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectPaper" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="imgScissor" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectScissor" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgRock" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectRock" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="80.0" right="40.0" top="40.0" />
+               </HBox.margin></ImageView>
+            <ImageView fx:id="imgPaper" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectPaper" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="40.0" right="40.0" top="40.0" />
+               </HBox.margin></ImageView>
+            <ImageView fx:id="imgScissor" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectScissor" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="40.0" right="80.0" top="40.0" />
+               </HBox.margin></ImageView>
          </children>
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="imgPlayer" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                  <ListView fx:id="listView" focusTraversable="false" prefHeight="200.0" prefWidth="300.0" />
-                  <ImageView fx:id="imgBot" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
                   <Label fx:id="lblPlayerScore" text="0">
                      <HBox.margin>
-                        <Insets left="50.0" top="10.0" />
+                        <Insets bottom="40.0" left="50.0" top="80.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="AR CARTER" size="40.0" />
+                     </font>
                   </Label>
+                  <ImageView fx:id="imgPlayer" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="30.0" top="50.0" />
+                     </HBox.margin></ImageView>
+                  <BorderPane prefHeight="206.0" prefWidth="518.0">
+                     <center>
+                        <ListView fx:id="listView" focusTraversable="false" prefHeight="146.0" prefWidth="172.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <top>
+                        <Label prefHeight="60.0" prefWidth="175.0" text="ROCK-PAPER-SCISSOR" textOverrun="CLIP" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="AR CARTER" size="24.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                  </BorderPane>
+                  <ImageView fx:id="imgBot" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="30.0" top="50.0" />
+                     </HBox.margin></ImageView>
                   <Label fx:id="lblBotScore" text="0">
                      <HBox.margin>
-                        <Insets left="450.0" top="10.0" />
+                        <Insets bottom="40.0" right="50.0" top="80.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="AR CARTER" size="40.0" />
+                     </font>
                   </Label>
                </children>
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
             </HBox>
          </children>
       </VBox>
