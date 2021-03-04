@@ -23,12 +23,15 @@ public class Bot_BeatLastMove implements IBot {
     }
 
     public Move calculateMove(List<Result> results) {
-        Move returnMove = botUtils.getRandomMove();
-        if(results.size()>1) {
-            Move opponentMove = botUtils.getLastMove(botUtils.getHumanMoves(results));
-            returnMove = botUtils.getWinningMove(opponentMove);
+        //if the results size is less than 1 the bot cant do the calculation and returns a random move
+        if(results.size()<1) {
+            return  botUtils.getRandomMove();
         }
-        return returnMove;
+         else{
+             //finds the last human made move and returns the move which would beat it
+            Move opponentMove = botUtils.getLastMove(botUtils.getHumanMoves(results));
+            return botUtils.getWinningMove(opponentMove);
+        }
     }
 
 

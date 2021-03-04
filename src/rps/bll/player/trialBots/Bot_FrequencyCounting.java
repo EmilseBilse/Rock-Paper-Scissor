@@ -25,6 +25,7 @@ public class Bot_FrequencyCounting implements IBot {
 
 
     public Move calculateMove(List<Result> results) {
+        //find the move the human plays most frequently and beats it
         Move opponentMove = botUtils.getMostFrequentMove(botUtils.getHumanMoves(results));
         return botUtils.getWinningMove(opponentMove);
     }

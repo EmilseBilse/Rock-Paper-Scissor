@@ -12,7 +12,7 @@ public class Bot_RotationPredicting implements IBot {
     private BotUtils botUtils = new BotUtils();
 
     /*
-    this bot uses the opponentmoves from the last three turns to interpret the next
+    this bot uses the opponents moves from the last three turns to interpret the next
      */
     public Bot_RotationPredicting(ArrayList<Result> historicData) {
         this.historicData = historicData;
@@ -25,17 +25,16 @@ public class Bot_RotationPredicting implements IBot {
 
     @Override
     public Move calculateMove(List<Result> results) {
-        Move returnMove = botUtils.getRandomMove();
-        if(historicData.size()>=3) {
-            ArrayList<Move> oppRotation = botUtils.interpretRotation(botUtils.getHumanMoves(historicData));
-            ArrayList<Move> winRotation = new ArrayList<>();
-            for (Move oppMove: oppRotation) {
-                winRotation.add(botUtils.getWinningMove(oppMove));
-            }
-            returnMove = winRotation.get(0);
+        //if results size is less than three the calculations wont work and returns a random move
+        if(results.size()<3) {
+            return botUtils.getRandomMove();
         }
-
-        return returnMove;
+        else {
+            //the opponents rotation is interpreted
+            ArrayList<Move> oppRotation = botUtils.interpretRotation(botUtils.getHumanMoves(results));
+            //the beating move of the interpreted move the opponent would make this round is returned
+            return botUtils.getWinningMove(oppRotation.get(0));
+        }
     }
 
     @Override

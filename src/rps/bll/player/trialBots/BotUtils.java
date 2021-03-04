@@ -8,19 +8,28 @@ import java.util.*;
 
 public class BotUtils {
 
-
-    public ArrayList<Move> getHumanMoves(List<Result> historicData) {
+    /**
+     * finds the human made moves in the list
+     * @param results
+     * @return the human made moves
+     */
+    public ArrayList<Move> getHumanMoves(List<Result> results) {
         ArrayList<Move> opponentMoves = new ArrayList<>();
-        for (int i = 0; i < historicData.size(); i++) {
-            if (historicData.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
-                opponentMoves.add(historicData.get(i).getLoserMove());
-            } else if (historicData.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.Human)) {
-                opponentMoves.add(historicData.get(i).getWinnerMove());
+        for (int i = 0; i < results.size(); i++) {
+            if (results.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
+                opponentMoves.add(results.get(i).getLoserMove());
+            } else if (results.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.Human)) {
+                opponentMoves.add(results.get(i).getWinnerMove());
             }
         }
         return opponentMoves;
     }
 
+    /**
+     * finds the human made move in the given result
+     * @param result
+     * @return the human move
+     */
     public Move getHumanMove(Result result) {
         if (result.getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
             return result.getLoserMove();
@@ -30,18 +39,28 @@ public class BotUtils {
         else return result.getLoserMove();
     }
 
-    public ArrayList<Move> getAIMoves(List<Result> historicData) {
+    /**
+     * finds the AI made moves in the list
+     * @param results
+     * @return the AI moves
+     */
+    public ArrayList<Move> getAIMoves(List<Result> results) {
         ArrayList<Move> botMoves = new ArrayList<>();
-        for (int i = 0; i < historicData.size(); i++) {
-            if (historicData.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
-                botMoves.add(historicData.get(i).getWinnerMove());
-            } else if (historicData.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.Human)) {
-                botMoves.add(historicData.get(i).getLoserMove());
+        for (int i = 0; i < results.size(); i++) {
+            if (results.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
+                botMoves.add(results.get(i).getWinnerMove());
+            } else if (results.get(i).getWinnerPlayer().getPlayerType().equals(PlayerType.Human)) {
+                botMoves.add(results.get(i).getLoserMove());
             }
         }
         return botMoves;
     }
 
+    /**
+     * finds the AI made move in the result
+     * @param result
+     * @return the Ai made move
+     */
     public Move getAIMove(Result result) {
         if (result.getWinnerPlayer().getPlayerType().equals(PlayerType.AI)) {
             return result.getWinnerMove();
@@ -51,7 +70,11 @@ public class BotUtils {
         else return result.getLoserMove();
     }
 
-
+    /**
+     * calculates the most frequently made move in the list
+     * @param moveList
+     * @return the most frequently made move
+     */
     public Move getMostFrequentMove(List<Move> moveList) {
         int r = 0;
         int p = 0;
@@ -78,6 +101,11 @@ public class BotUtils {
 
     }
 
+    /**
+     * calculates which move would beat the given move
+     * @param opponentMove
+     * @return the winning move
+     */
     public Move getWinningMove(Move opponentMove) {
         Move returnMove;
         switch (opponentMove) {
@@ -93,6 +121,11 @@ public class BotUtils {
         return returnMove;
     }
 
+    /**
+     * calculates which move would beat the given move for every move in the given list
+     * @param movesToBeat
+     * @return the winning moves
+     */
     public ArrayList<Move> getWinningMoves(ArrayList<Move> movesToBeat) {
         ArrayList<Move> returnMoves = new ArrayList<>();
         for(Move move: movesToBeat) {
@@ -101,10 +134,19 @@ public class BotUtils {
         return returnMoves;
     }
 
+    /**
+     * gets the most recent move in the given list
+     * @param list
+     * @return
+     */
     public Move getLastMove(List<Move> list) {
         return list.get(list.size() - 1);
     }
 
+    /**
+     * returns a Random move
+     * @return a random move
+     */
     public Move getRandomMove() {
         Random random = new Random();
         Move returnMove;
@@ -122,6 +164,11 @@ public class BotUtils {
         return returnMove;
     }
 
+    /**
+     * returns the last three moves in the list as a string
+     * @param list
+     * @return returnmoves
+     */
     public ArrayList<Move> interpretRotation(List<Move> list) {
         ArrayList<Move> returnMoves = null;
         if (list.size() >= 3) {
@@ -133,6 +180,12 @@ public class BotUtils {
         return returnMoves;
     }
 
+    /**
+     * calculates how much the bot would have won given the opponent moves in the list
+     * @param list
+     * @param bot
+     * @return the bots win count
+     */
     public int getWinCount(List<Result> list, IBot bot) {
         int winCount=0;
             ArrayList<Result> botResults = new ArrayList<>();
@@ -146,6 +199,11 @@ public class BotUtils {
         return winCount;
     }
 
+    /**
+     * converts the moves in a list to a string, where each char represents a move
+     * @param moves
+     * @return string
+     */
     public String movesToString (List<Move> moves) {
         StringBuilder returnString = new StringBuilder();
         for (Move currentMove : moves) {
@@ -158,6 +216,11 @@ public class BotUtils {
         return returnString.toString();
     }
 
+    /**
+     * converts the given char c into the belonging move
+     * @param c
+     * @return
+     */
     public Move charToMove (char c) {
         return switch (String.valueOf(c)) {
             case "r" -> Move.Rock;

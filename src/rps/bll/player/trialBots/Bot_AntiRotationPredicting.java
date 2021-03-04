@@ -29,15 +29,15 @@ public class Bot_AntiRotationPredicting implements IBot {
 
     @Override
     public Move calculateMove(List<Result> results) {
+        //if the size of the given list is less than 3 the bot cant do a calculation and returns a random move
         if(results.size() <3) {
             return botUtils.getRandomMove();
         }
-        ArrayList<Move> ownMoves = new ArrayList<>();
-        for (int i = 1; i <=3; i++) {
-            ownMoves.add(botUtils.getAIMove(results.get(results.size()-i)));
-        }
-        ArrayList<Move> beatingMoves = botUtils.getWinningMoves(ownMoves);
-        ArrayList<Move> beatingBeatingOwnMoves = botUtils.getWinningMoves(beatingMoves);
-        return beatingBeatingOwnMoves.get(2);
+        //finds the third most recent move made by a bot and finds the move which would beat it twice
+        Move thirdRecentMove = botUtils.getAIMove(results.get(results.size()-3));
+        Move returnMove = botUtils.getWinningMove(botUtils.getWinningMove(thirdRecentMove));
+
+        //it returns the move
+        return returnMove;
     }
 }
