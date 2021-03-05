@@ -42,7 +42,7 @@
                      </HBox.margin></ImageView>
                   <BorderPane prefHeight="206.0" prefWidth="518.0">
                      <center>
-                        <ListView fx:id="listView" focusTraversable="false" prefHeight="146.0" prefWidth="172.0" BorderPane.alignment="CENTER" />
+                        <ListView fx:id="listView" focusTraversable="false" prefHeight="146.0" prefWidth="388.0" BorderPane.alignment="CENTER" />
                      </center>
                      <top>
                         <Label prefHeight="60.0" prefWidth="175.0" text="ROCK-PAPER-SCISSOR" textOverrun="CLIP" BorderPane.alignment="CENTER">
@@ -52,7 +52,7 @@
                         </Label>
                      </top>
                      <padding>
-                        <Insets left="30.0" right="30.0" />
+                        <Insets left="5.0" right="5.0" />
                      </padding>
                   </BorderPane>
                   <ImageView fx:id="imgBot" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
